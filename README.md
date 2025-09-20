@@ -6,12 +6,14 @@ Esta aplicación fue generada usando [Angular CLI](https://github.com/angular/an
 
 ### Inicio Rápido
 
+Debes tener instalado Node.js y Angular Cli (este último opcional, ya que se encuentra como dependencia de desarrollo)
+
 ```bash
 # 1. Instalar dependencias
 npm install
 
 # 2. Levantar el servidor de desarrollo
-ng serve
+npm start
 
 # 3. Abrir en el navegador
 # http://localhost:4200/
@@ -19,7 +21,7 @@ ng serve
 
 Una vez que el servidor esté ejecutándose, abre tu navegador y navega a `http://localhost:4200/`. La aplicación se recargará automáticamente cada vez que modifiques alguno de los archivos fuente.
 
-## Generación de código
+## Generación de código (Solo si tienes ANGULAR CLI instalado)
 
 Angular CLI incluye herramientas poderosas de generación de código. Para generar un nuevo componente, ejecuta:
 
