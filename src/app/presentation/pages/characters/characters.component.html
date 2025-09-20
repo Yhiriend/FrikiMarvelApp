@@ -1,0 +1,60 @@
+<div class="characters-page">
+  <app-header (search)="searchCharacters($event)"></app-header>
+  
+  <main class="characters-main">
+    <div class="characters-container">
+      <!-- Page Title -->
+      <section class="characters-hero">
+        <h1 class="characters-title">Explora los personajes</h1>
+        <p class="characters-subtitle">Descubre los héroes y villanos más icónicos del universo Marvel</p>
+      </section>
+
+      <!-- Loading State -->
+      <app-loader 
+        *ngIf="isLoading && characters.length === 0" 
+        size="large" 
+        color="white" 
+        message="Cargando personajes..."
+      ></app-loader>
+
+      <!-- Error State -->
+      <div *ngIf="error" class="error-state">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>{{ error }}</p>
+        <button class="retry-btn" (click)="loadCharacters()">Reintentar</button>
+      </div>
+
+      <!-- Characters Grid -->
+      <section class="characters-grid" *ngIf="!error">
+        <app-character-card
+          *ngFor="let character of characters"
+          [character]="character"
+          [showActions]="true"
+          (cardClick)="onCharacterClick($event)"
+          (viewClick)="onViewClick($event)"
+        ></app-character-card>
+      </section>
+
+      <!-- Load More Button -->
+      <div *ngIf="hasMore && !isLoading && !error" class="load-more-container">
+        <button class="load-more-btn" (click)="loadMoreCharacters()">
+          Cargar más personajes
+        </button>
+      </div>
+
+      <!-- Loading More State -->
+      <app-loader 
+        *ngIf="isLoading && characters.length > 0" 
+        size="medium" 
+        color="white" 
+        message="Cargando más personajes..."
+      ></app-loader>
+
+      <!-- No Results -->
+      <div *ngIf="!isLoading && !error && characters.length === 0" class="no-results">
+        <i class="fas fa-search"></i>
+        <p>No se encontraron personajes</p>
+      </div>
+    </div>
+  </main>
+</div>

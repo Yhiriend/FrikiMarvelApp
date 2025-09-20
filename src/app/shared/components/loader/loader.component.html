@@ -1,0 +1,12 @@
+<div class="loader" [ngClass]="getLoaderClasses()">
+  <div class="loader-spinner" [ngClass]="getSpinnerClasses()">
+    <div class="spinner-ring"></div>
+    <div class="spinner-ring"></div>
+    <div class="spinner-ring"></div>
+    <div class="spinner-ring"></div>
+  </div>
+  
+  <div class="loader-content" *ngIf="message || showDefaultMessage">
+    <p class="loader-message">{{ message || defaultMessage }}</p>
+  </div>
+</div>

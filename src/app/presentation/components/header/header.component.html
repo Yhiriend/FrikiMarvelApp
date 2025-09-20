@@ -1,0 +1,59 @@
+<header class="header">
+  <div class="header__container">
+    <!-- Logo and Brand -->
+    <div class="header__brand">
+      <div class="header__logo">
+        <div class="logo-icon">
+          <div class="logo-triangle logo-triangle--1"></div>
+          <div class="logo-triangle logo-triangle--2"></div>
+          <div class="logo-triangle logo-triangle--3"></div>
+        </div>
+      </div>
+      <h1 class="app-title">
+        <span class="title-friki">FRIKI</span>
+        <span class="title-marvel">MARVEL</span>
+      </h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="header__nav">
+      <a routerLink="/comics" routerLinkActive="active" class="nav-link">Cómics</a>
+      <a routerLink="/favorites" routerLinkActive="active" class="nav-link">Favoritos</a>
+      <a routerLink="/characters" routerLinkActive="active" class="nav-link">Personajes</a>
+    </nav>
+
+    <!-- Search and Actions -->
+    <div class="header__actions">
+      <!-- Search Bar -->
+      <div class="header__search">
+        <app-input
+          type="text"
+          placeholder="Buscar cómics..."
+          [(ngModel)]="searchQuery"
+          (keyup.enter)="onSearch()"
+          icon="fas fa-search"
+          iconPosition="left"
+        ></app-input>
+      </div>
+
+      <!-- User Profile -->
+      <div class="header__profile" *ngIf="currentUser">
+        <div class="profile-avatar">
+          <span class="avatar-text">{{ userInitials }}</span>
+        </div>
+        <div class="profile-menu">
+          <div class="profile-info">
+            <span class="profile-name">{{ currentUser.name }}</span>
+            <span class="profile-email">{{ currentUser.email }}</span>
+          </div>
+          <div class="profile-actions">
+            <button class="profile-action" (click)="logout()">
+              <i class="fas fa-sign-out-alt"></i>
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,86 @@
+<div class="login-container">
+  <div class="login-card">
+    <!-- Decorative corners -->
+    <div class="corner corner-top-left"></div>
+    <div class="corner corner-bottom-right"></div>
+    
+    <!-- Title -->
+    <h1 class="app-title">
+      <span class="title-friki">FRIKI</span>
+      <span class="title-marvel">MARVEL</span>
+    </h1>
+    
+    <!-- Welcome message -->
+    <p class="welcome-message">¡Bienvenido de nuevo, Héroe!</p>
+    
+    <!-- Error message -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+    
+    <!-- Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <!-- Name field (only for registration) -->
+      <app-input
+        *ngIf="!isLoginMode"
+        type="text"
+        formControlName="name"
+        placeholder="Nombre completo"
+        [error]="getFieldError('name')"
+      ></app-input>
+      
+      <!-- Identification field (only for registration) -->
+      <app-input
+        *ngIf="!isLoginMode"
+        type="text"
+        formControlName="identification"
+        placeholder="Identificación"
+        [error]="getFieldError('identification')"
+      ></app-input>
+      
+      <!-- Email field -->
+      <app-input
+        type="email"
+        formControlName="email"
+        placeholder="Correo electrónico"
+        [error]="getFieldError('email')"
+      ></app-input>
+      
+      <!-- Password field -->
+      <app-input
+        type="password"
+        formControlName="password"
+        placeholder="Contraseña"
+        [error]="getFieldError('password')"
+      ></app-input>
+      
+      <!-- Submit button -->
+      <app-button
+        type="primary"
+        size="large"
+        [loading]="isLoading"
+        [disabled]="isLoading"
+        [fullWidth]="true"
+        (clicked)="onSubmit()"
+      >
+        {{ isLoginMode ? 'Iniciar sesión' : 'Registrarse' }}
+      </app-button>
+    </form>
+    
+    <!-- Toggle mode link -->
+    <div class="toggle-mode">
+      <span *ngIf="isLoginMode">
+        ¿No tienes una cuenta? 
+        <a href="#" (click)="toggleMode(); $event.preventDefault()" class="register-link">
+          Regístrate
+        </a>
+      </span>
+      <span *ngIf="!isLoginMode">
+        ¿Ya tienes una cuenta? 
+        <a href="#" (click)="toggleMode(); $event.preventDefault()" class="register-link">
+          Inicia sesión
+        </a>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,59 +1,101 @@
 # FrikiMarvelApp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+Esta aplicación fue generada usando [Angular CLI](https://github.com/angular/angular-cli) versión 19.2.13.
 
-## Development server
+## 🚀 Comandos Útiles
 
-To start a local development server, run:
+### Inicio Rápido
 
 ```bash
+# 1. Instalar dependencias
+npm install
+
+# 2. Levantar el servidor de desarrollo
 ng serve
+
+# 3. Abrir en el navegador
+# http://localhost:4200/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Una vez que el servidor esté ejecutándose, abre tu navegador y navega a `http://localhost:4200/`. La aplicación se recargará automáticamente cada vez que modifiques alguno de los archivos fuente.
 
-## Code scaffolding
+## Generación de código
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Angular CLI incluye herramientas poderosas de generación de código. Para generar un nuevo componente, ejecuta:
 
 ```bash
-ng generate component component-name
+ng generate component nombre-del-componente
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Para una lista completa de esquemas disponibles (como `components`, `directives`, o `pipes`), ejecuta:
 
 ```bash
 ng generate --help
 ```
 
-## Building
+## Construcción
 
-To build the project run:
+Para construir el proyecto ejecuta:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Esto compilará tu proyecto y almacenará los artefactos de construcción en el directorio `dist/`. Por defecto, la construcción de producción optimiza tu aplicación para rendimiento y velocidad.
 
-## Running unit tests
+## Recursos Adicionales
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Para más información sobre el uso de Angular CLI, incluyendo referencias detalladas de comandos, visita la página [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli).
 
-```bash
-ng test
+## Características de la Aplicación
+
+### 🦸‍♂️ Funcionalidades Principales
+
+- **Exploración de Cómics**: Navega y busca cómics de Marvel
+- **Personajes**: Descubre información detallada de tus superhéroes favoritos
+- **Favoritos**: Guarda tus cómics preferidos para acceso rápido
+- **Búsqueda**: Encuentra cómics y personajes específicos
+- **Autenticación**: Sistema de login y registro seguro
+
+### 🚀 Tecnologías Utilizadas
+
+- **Angular 19**: Framework principal
+- **TypeScript**: Lenguaje de programación
+- **SCSS**: Estilos y diseño
+- **RxJS**: Programación reactiva
+- **Clean Architecture**: Arquitectura limpia y escalable
+
+### 📱 Características Técnicas
+
+- **Caché Inteligente**: Sistema de caché para optimizar rendimiento
+- **Responsive Design**: Adaptable a todos los dispositivos
+- **Toast Notifications**: Notificaciones elegantes para feedback del usuario
+- **Guards de Autenticación**: Protección de rutas
+- **Lazy Loading**: Carga perezosa de componentes
+
+
+### 📁 Estructura del Proyecto
+
+```
+src/
+├── app/
+│   ├── @core/                 # Configuración central
+│   ├── application/           # Casos de uso
+│   ├── domain/               # Entidades y repositorios
+│   ├── infrastructure/       # Implementaciones
+│   ├── presentation/         # Componentes y páginas
+│   └── shared/              # Componentes compartidos
+├── environments/            # Configuraciones de entorno
+└── styles.scss             # Estilos globales
 ```
 
-## Running end-to-end tests
+### 🔧 Configuración
 
-For end-to-end (e2e) testing, run:
+La aplicación utiliza variables de entorno para la configuración de la API. Asegúrate de configurar correctamente los archivos en `src/environments/`.
 
-```bash
-ng e2e
-```
+### 📝 Notas de Desarrollo
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- La aplicación implementa Clean Architecture para mantener el código organizado y escalable
+- Se utiliza inyección de dependencias para facilitar el testing y mantenimiento
+- El sistema de caché mejora significativamente la experiencia del usuario
+- Las notificaciones toast proporcionan feedback inmediato al usuario

@@ -1,0 +1,31 @@
+<div [class]="containerClasses">
+  <label *ngIf="label" class="input__label">
+    {{ label }}
+    <span *ngIf="required" class="input__required">*</span>
+  </label>
+  
+  <div class="input__wrapper">
+    <span *ngIf="icon && iconPosition === 'left'" class="input__icon input__icon--left">
+      <i [class]="icon"></i>
+    </span>
+    
+    <input
+      [type]="type"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [value]="value"
+      [class]="inputClasses"
+      (input)="onInput($event)"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+    />
+    
+    <span *ngIf="icon && iconPosition === 'right'" class="input__icon input__icon--right">
+      <i [class]="icon"></i>
+    </span>
+  </div>
+  
+  <div *ngIf="error" class="input__error">
+    {{ error }}
+  </div>
+</div>

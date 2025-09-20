@@ -1,0 +1,124 @@
+.login-container {
+  min-height: 100vh;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #2d1b69 0%, #1a0d3a 100%);
+  background-size: 10px 10px;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.login-card {
+  position: relative;
+  background: linear-gradient(135deg, #3d2a7a 0%, #2a1a5e 100%);
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.corner {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.corner-top-left {
+  top: -8px;
+  left: -8px;
+  border-width: 0 0 20px 20px;
+  border-color: transparent transparent #8b5cf6 transparent;
+}
+
+.corner-bottom-right {
+  bottom: -8px;
+  right: -8px;
+  border-width: 20px 20px 0 0;
+  border-color: #8b5cf6 transparent transparent transparent;
+}
+
+.app-title {
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-family: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
+}
+
+.title-friki {
+  color: #ffffff;
+}
+
+.title-marvel {
+  color: #8b5cf6;
+}
+
+.welcome-message {
+  text-align: center;
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.toggle-mode {
+  text-align: center;
+  margin-top: 24px;
+  color: #ffffff;
+  font-size: 0.95rem;
+}
+
+.register-link {
+  color: #8b5cf6;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #7c3aed;
+    text-decoration: underline;
+  }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .login-container {
+    padding: 16px;
+  }
+
+  .login-card {
+    padding: 32px 24px;
+  }
+
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .welcome-message {
+    font-size: 1rem;
+  }
+}

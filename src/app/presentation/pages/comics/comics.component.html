@@ -1,0 +1,63 @@
+<div class="comics-page">
+  <app-header (search)="searchComics($event)"></app-header>
+  
+  <main class="comics-main">
+    <div class="comics-container">
+      <!-- Page Title -->
+      <section class="comics-hero">
+        <h1 class="comics-title">Explora nuestra colección</h1>
+        <p class="comics-subtitle">Descubre los mejores cómics y sumérgete en increíbles aventuras</p>
+      </section>
+
+      <!-- Loading State -->
+      <app-loader 
+        *ngIf="isLoading && comics.length === 0" 
+        size="large" 
+        color="white" 
+        message="Cargando cómics..."
+      ></app-loader>
+
+      <!-- Error State -->
+      <div *ngIf="error" class="error-state">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>{{ error }}</p>
+        <button class="retry-btn" (click)="loadComics()">Reintentar</button>
+      </div>
+
+      <!-- Comics Grid -->
+      <section class="comics-grid" *ngIf="!error">
+        <app-comic-card
+          *ngFor="let comic of comics"
+          [comic]="comic"
+          [showActions]="true"
+          [isFavorite]="isFavorite(comic)"
+          [isFavoriteLoading]="isFavoriteLoading(comic)"
+          (cardClick)="onComicClick($event)"
+          (favoriteClick)="onFavoriteClick($event)"
+          (viewClick)="onViewClick($event)"
+        ></app-comic-card>
+      </section>
+
+      <!-- Load More Button -->
+      <div *ngIf="hasMore && !isLoading && !error" class="load-more-container">
+        <button class="load-more-btn" (click)="loadMoreComics()">
+          Cargar más cómics
+        </button>
+      </div>
+
+      <!-- Loading More State -->
+      <app-loader 
+        *ngIf="isLoading && comics.length > 0" 
+        size="medium" 
+        color="white" 
+        message="Cargando más cómics..."
+      ></app-loader>
+
+      <!-- No Results -->
+      <div *ngIf="!isLoading && !error && comics.length === 0" class="no-results">
+        <i class="fas fa-search"></i>
+        <p>No se encontraron cómics</p>
+      </div>
+    </div>
+  </main>
+</div>

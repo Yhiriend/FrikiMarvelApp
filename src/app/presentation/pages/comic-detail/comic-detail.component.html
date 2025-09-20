@@ -1,0 +1,158 @@
+<div class="comic-detail-page">
+  <app-header></app-header>
+  
+  <main class="comic-detail-main">
+    <!-- Loading State -->
+    <app-loader 
+      *ngIf="isLoading" 
+      size="large" 
+      color="white" 
+      message="Cargando detalles del cómic..."
+    ></app-loader>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="error-state">
+      <i class="fas fa-exclamation-triangle"></i>
+      <p>{{ error }}</p>
+      <button class="retry-btn" (click)="router.navigate(['/comics'])">Volver a cómics</button>
+    </div>
+
+    <!-- Comic Detail Content -->
+    <div *ngIf="comic && !isLoading && !error" class="comic-detail-content">
+
+      <div class="comic-detail-container">
+        <!-- Comic Image Section -->
+        <div class="comic-image-section">
+          <div class="comic-image-wrapper">
+            <img 
+              [src]="getComicImageUrl()" 
+              [alt]="comic.title"
+              class="comic-image"
+            />
+            <div class="comic-image-glow"></div>
+          </div>
+        </div>
+
+        <!-- Comic Info Section -->
+        <div class="comic-info-section">
+          <!-- Header Info -->
+          <div class="comic-header">
+            <!-- Breadcrumb -->
+            <div class="breadcrumb-container">
+              <app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
+            </div>
+            <h1 class="comic-title">{{ comic.title }}</h1>
+            <div class="comic-meta">
+              <span class="comic-series">{{ getComicSeries() }}</span>
+              <span class="comic-issue" *ngIf="getComicIssueNumber()">{{ getComicIssueNumber() }}</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="comic-actions">
+            <button 
+              class="action-btn action-btn--favorite" 
+              [class.active]="isFavorite"
+              [disabled]="isFavoriteLoading"
+              (click)="onFavoriteClick()"
+            >
+              <i class="fas fa-heart" *ngIf="!isFavoriteLoading"></i>
+              <i class="fas fa-spinner fa-spin" *ngIf="isFavoriteLoading"></i>
+              <span>{{ isFavorite ? 'En favoritos' : 'Agregar a favoritos' }}</span>
+            </button>
+            <button class="action-btn action-btn--share" (click)="onShareClick()">
+              <i class="fas fa-share-alt"></i>
+              <span>Compartir</span>
+            </button>
+          </div>
+
+          <!-- Description -->
+          <div class="comic-description">
+            <h3>Descripción</h3>
+            <p>{{ getComicDescription() }}</p>
+          </div>
+
+          <!-- Comic Details Grid -->
+          <div class="comic-details-grid">
+            <!-- Basic Info -->
+            <div class="detail-card">
+              <h4><i class="fas fa-info-circle"></i> Información Básica</h4>
+              <div class="detail-item">
+                <span class="detail-label">Formato:</span>
+                <span class="detail-value">{{ comic.format }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Páginas:</span>
+                <span class="detail-value">{{ comic.pageCount }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Precio:</span>
+                <span class="detail-value price">{{ getComicPrice() }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Fecha de lanzamiento:</span>
+                <span class="detail-value">{{ getReleaseDate() }}</span>
+              </div>
+            </div>
+
+            <!-- Creators -->
+            <div class="detail-card" *ngIf="getComicCreators().length > 0">
+              <h4><i class="fas fa-pen"></i> Creadores</h4>
+              <div class="creators-list">
+                <div *ngFor="let creator of getComicCreators()" class="creator-item">
+                  <span class="creator-name">{{ creator.name }}</span>
+                  <span class="creator-role">{{ creator.role }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Characters -->
+            <div class="detail-card" *ngIf="getComicCharacters().length > 0">
+              <h4><i class="fas fa-users"></i> Personajes</h4>
+              <div class="characters-list">
+                <div *ngFor="let character of getComicCharacters()" class="character-item">
+                  <span class="character-name">{{ character.name }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stories -->
+            <div class="detail-card" *ngIf="getComicStories().length > 0">
+              <h4><i class="fas fa-book-open"></i> Historias</h4>
+              <div class="stories-list">
+                <div *ngFor="let story of getComicStories()" class="story-item">
+                  <span class="story-name">{{ story.name }}</span>
+                  <span class="story-type">{{ story.type }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Events -->
+            <div class="detail-card" *ngIf="getComicEvents().length > 0">
+              <h4><i class="fas fa-calendar-alt"></i> Eventos</h4>
+              <div class="events-list">
+                <div *ngFor="let event of getComicEvents()" class="event-item">
+                  <span class="event-name">{{ event.name }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Links -->
+            <div class="detail-card" *ngIf="getComicUrls().length > 0">
+              <h4><i class="fas fa-external-link-alt"></i> Enlaces</h4>
+              <div class="links-list">
+                <a *ngFor="let url of getComicUrls()" 
+                   [href]="url.url" 
+                   target="_blank" 
+                   class="link-item">
+                  <i class="fas fa-link"></i>
+                  <span>{{ url.type }}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

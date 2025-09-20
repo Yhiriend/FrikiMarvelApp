@@ -1,0 +1,57 @@
+<div class="comic-card" (click)="onCardClick()">
+  <!-- Comic Cover Section -->
+  <div class="comic-cover">
+    <img 
+      [src]="getComicImageUrl()" 
+      [alt]="comic.title"
+      class="comic-image"
+    />
+    <div class="comic-overlay">
+      <div class="comic-actions" *ngIf="showActions">
+        <button 
+          class="action-btn action-btn--favorite" 
+          [class.active]="isFavorite"
+          [disabled]="isFavoriteLoading"
+          (click)="onFavoriteClick($event)"
+          [title]="isFavorite ? 'Eliminar de favoritos' : 'Agregar a favoritos'"
+        >
+          <i class="fas fa-heart" *ngIf="!isFavoriteLoading"></i>
+          <i class="fas fa-spinner fa-spin" *ngIf="isFavoriteLoading"></i>
+        </button>
+        <button 
+          class="action-btn action-btn--view" 
+          (click)="onViewClick($event)"
+          title="Ver detalles"
+        >
+          <i class="fas fa-eye"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Information Panel Section -->
+  <div class="comic-info">
+    <div class="comic-series">{{ getComicSeries() }}</div>
+    <div class="comic-issue" *ngIf="getComicIssueNumber()">
+      N°: {{ comic.issueNumber }}
+    </div>
+    <div class="comic-format">Formato: {{ comic.format }}</div>
+    <div class="comic-release">En venta: {{ getReleaseDate() }}</div>
+    
+    <!-- Additional Info -->
+    <div class="comic-details">
+      <div class="comic-creator" *ngIf="getComicCreators() !== 'Unknown'">
+        <i class="fas fa-pen"></i>
+        <span>{{ getComicCreators() }}</span>
+      </div>
+      <div class="comic-characters" *ngIf="getComicCharacters() !== 'No characters'">
+        <i class="fas fa-users"></i>
+        <span>{{ getComicCharacters() }}</span>
+      </div>
+      <div class="comic-price" *ngIf="getComicPrice() !== 'N/A'">
+        <i class="fas fa-dollar-sign"></i>
+        <span>{{ getComicPrice() }}</span>
+      </div>
+    </div>
+  </div>
+</div>

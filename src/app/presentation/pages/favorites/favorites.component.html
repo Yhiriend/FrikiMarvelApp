@@ -1,0 +1,84 @@
+<div class="favorites-page">
+  <app-header></app-header>
+  
+  <main class="favorites-main">
+    <div class="favorites-container">
+      <!-- Page Title -->
+      <section class="favorites-hero">
+        <h1 class="favorites-title">Mis Favoritos</h1>
+        <p class="favorites-subtitle">Tu colección personal de cómics favoritos</p>
+      </section>
+
+      <!-- Loading State -->
+      <app-loader 
+        *ngIf="isLoading && favorites.length === 0" 
+        size="large" 
+        color="white" 
+        message="Cargando favoritos..."
+      ></app-loader>
+
+      <!-- Error State -->
+      <div *ngIf="error" class="error-state">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>{{ error }}</p>
+        <button class="retry-btn" (click)="loadFavorites()">Reintentar</button>
+      </div>
+
+      <!-- Favorites Grid -->
+      <section class="favorites-grid" *ngIf="!error && favorites.length > 0">
+        <div class="favorite-card-wrapper" *ngFor="let favorite of favorites">
+          <div class="favorite-card">
+            <div class="favorite-image">
+              <img [src]="getComicImageUrl(favorite)" [alt]="favorite.title" />
+            </div>
+            <div class="favorite-content">
+              <h3 class="favorite-title">{{ favorite.title }}</h3>
+              <div class="favorite-details">
+                <p class="favorite-format">{{ getComicFormat(favorite) }}</p>
+                <p class="favorite-author">{{ getComicCreators(favorite) }}</p>
+                <p class="favorite-price">{{ getComicPrice(favorite) }}</p>
+                <p class="favorite-characters">{{ getComicCharacters(favorite) }}</p>
+              </div>
+              <div class="favorite-actions">
+                <button class="action-btn action-btn--view" (click)="onViewClick(favorite)">
+                  <i class="fas fa-eye"></i>
+                  <span>Ver Detalles</span>
+                </button>
+                <button class="action-btn action-btn--remove" (click)="onRemoveFavorite(favorite)">
+                  <i class="fas fa-trash"></i>
+                  <span>Eliminar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Favorite Info -->
+          <div class="favorite-info">
+            <div class="favorite-date">
+              <i class="fas fa-heart"></i>
+              <span>Agregado: {{ favorite.addedDate | date:'short' }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- No Favorites State -->
+      <div *ngIf="!isLoading && !error && favorites.length === 0" class="no-favorites">
+        <div class="no-favorites-content">
+          <i class="fas fa-heart-broken"></i>
+          <h2>No tienes favoritos aún</h2>
+          <p>Explora nuestra colección de cómics y agrega tus favoritos para verlos aquí.</p>
+          <button class="explore-btn" (click)="router.navigate(['/comics'])">
+            <i class="fas fa-search"></i>
+            <span>Explorar Cómics</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Favorites Count -->
+      <div *ngIf="!isLoading && !error && favorites.length > 0" class="favorites-count">
+        <p>{{ favorites.length }} {{ favorites.length === 1 ? 'cómic favorito' : 'cómics favoritos' }}</p>
+      </div>
+    </div>
+  </main>
+</div>

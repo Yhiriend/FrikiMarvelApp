@@ -1,0 +1,23 @@
+<nav class="breadcrumb" *ngIf="items.length > 0">
+  <ol class="breadcrumb-list">
+    <li *ngFor="let item of items; let i = index" class="breadcrumb-item">
+      <a 
+        *ngIf="!isLastItem(i)"
+        [routerLink]="item.link" 
+        class="breadcrumb-link"
+      >
+        {{ item.label }}
+      </a>
+      <span 
+        *ngIf="isLastItem(i)"
+        class="breadcrumb-current"
+      >
+        {{ item.label }}
+      </span>
+      <i 
+        *ngIf="!isLastItem(i)"
+        class="fas fa-chevron-right breadcrumb-separator"
+      ></i>
+    </li>
+  </ol>
+</nav>

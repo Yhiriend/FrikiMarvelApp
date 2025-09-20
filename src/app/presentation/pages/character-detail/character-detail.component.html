@@ -1,0 +1,111 @@
+<div class="character-detail-page">
+  <app-header></app-header>
+  
+  <main class="character-detail-main">
+    <div class="character-detail-container">
+      <!-- Breadcrumb -->
+      <app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
+
+      <!-- Loading State -->
+      <app-loader 
+        *ngIf="isLoading" 
+        size="large" 
+        color="white" 
+        message="Cargando personaje..."
+      ></app-loader>
+
+      <!-- Error State -->
+      <div *ngIf="error" class="error-state">
+        <i class="fas fa-exclamation-triangle"></i>
+        <p>{{ error }}</p>
+        <button class="retry-btn" (click)="loadCharacterDetail()">Reintentar</button>
+      </div>
+
+      <!-- Character Detail -->
+      <div *ngIf="character && !isLoading && !error" class="character-detail">
+        <div class="character-header">
+          <div class="character-image">
+            <img 
+              [src]="getCharacterImageUrl()" 
+              [alt]="character.name"
+              class="character-img"
+            />
+          </div>
+          
+          <div class="character-info">
+            <h1 class="character-name">{{ character.name }}</h1>
+            
+            <div class="character-description" *ngIf="character.description">
+              <h3>Descripción</h3>
+              <p>{{ character.description }}</p>
+            </div>
+
+            <div class="character-stats">
+              <div class="stat-item">
+                <i class="fas fa-book"></i>
+                <span class="stat-label">Cómics:</span>
+                <span class="stat-value">{{ character.comics.available }}</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-layer-group"></i>
+                <span class="stat-label">Series:</span>
+                <span class="stat-value">{{ character.series.available }}</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-scroll"></i>
+                <span class="stat-label">Historias:</span>
+                <span class="stat-value">{{ character.stories.available }}</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-calendar"></i>
+                <span class="stat-label">Eventos:</span>
+                <span class="stat-value">{{ character.events.available }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comics Section -->
+        <section class="character-comics" *ngIf="character.comics.items.length > 0">
+          <h2>Cómics destacados</h2>
+          <div class="comics-list">
+            <div *ngFor="let comic of character.comics.items.slice(0, 10)" class="comic-item">
+              <span>{{ comic.name }}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Series Section -->
+        <section class="character-series" *ngIf="character.series.items.length > 0">
+          <h2>Series</h2>
+          <div class="series-list">
+            <div *ngFor="let series of character.series.items.slice(0, 10)" class="series-item">
+              <span>{{ series.name }}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stories Section -->
+        <section class="character-stories" *ngIf="character.stories.items.length > 0">
+          <h2>Historias destacadas</h2>
+          <div class="stories-list">
+            <div *ngFor="let story of character.stories.items.slice(0, 10)" class="story-item">
+              <span>{{ story.name }}</span>
+              <small class="story-type">{{ story.type }}</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- Events Section -->
+        <section class="character-events" *ngIf="character.events.items.length > 0">
+          <h2>Eventos</h2>
+          <div class="events-list">
+            <div *ngFor="let event of character.events.items" class="event-item">
+              <span>{{ event.name }}</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
